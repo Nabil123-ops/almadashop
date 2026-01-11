@@ -70,14 +70,14 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <a href="https://wa.me/96176914627" className="hover:text-foreground">
-                  +961 76 914 627
+                <a href="https://wa.me/96103444171" className="hover:text-foreground">
+                  +961 03 444 171
                 </a>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:info@dahdouhai.live" className="hover:text-foreground">
-                  info@dahdouhai.live
+                <a href="mailto:almadashop.live@gmail.com" className="hover:text-foreground">
+                  almadashop.live@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2 text-muted-foreground">
@@ -89,7 +89,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-border/40 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} DahdouhStore. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Almadashop. All rights reserved.</p>
         </div>
       </div>
     </footer>
