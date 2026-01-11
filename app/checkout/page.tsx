@@ -47,7 +47,7 @@ ${notes || "No size / color / RAM / storage selected"}
     )
 
     window.open(
-      `https://wa.me/447377279370?text=${encodeURIComponent(orderText)}`,
+      `https://wa.me/96103444171?text=${encodeURIComponent(orderText)}`,
       "_blank"
     )
 
