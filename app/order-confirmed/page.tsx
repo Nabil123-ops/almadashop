@@ -46,7 +46,7 @@ export default function OrderConfirmedPage() {
           </Link>
 
           <a
-            href="https://wa.me/447377279370"
+            href="https://wa.me/96103444171"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -65,7 +65,7 @@ export default function OrderConfirmedPage() {
             Cash on Delivery • Fast Shipping • Secure Order
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            © SmartShop
+            © Almadashop
           </p>
         </div>
       </div>
