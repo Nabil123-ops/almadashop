@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* =========================
+   SMARTSHOP PREMIUM THEME
+   NO ANIMATION – ZERO LAG
+========================= */
+
+:root {
+  /* Brand */
+  --brand-red: oklch(0.62 0.22 25);
+  --brand-green: oklch(0.72 0.22 150);
+
+  /* Base */
+  --background: oklch(0.99 0.01 110);
+  --foreground: oklch(0.15 0.02 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+
+  --primary: var(--brand-red);
+  --primary-foreground: oklch(0.99 0.01 110);
+
+  --secondary: oklch(0.965 0.01 110);
+  --secondary-foreground: var(--foreground);
+
+  --muted: oklch(0.965 0.01 110);
+  --muted-foreground: oklch(0.52 0.02 250);
+
+  --accent: oklch(0.91 0.06 150);
+  --accent-foreground: var(--foreground);
+
+  --destructive: var(--brand-red);
+
+  --border: oklch(0.92 0.01 110);
+  --input: oklch(0.92 0.01 110);
+  --ring: var(--brand-green);
+
+  --radius: 0.75rem;
+
+  /* Effects (STATIC) */
+  --glass: rgba(255,255,255,.65);
+  --shadow-soft: 0 10px 30px rgba(0,0,0,.06);
+  --shadow-card: 0 18px 50px rgba(0,0,0,.10);
+
+  --nav-bg: color-mix(in oklch, var(--glass) 86%, transparent);
+  --nav-border: color-mix(in oklch, var(--border) 65%, transparent);
+  --nav-blur: 14px;
+
+  --skeleton: rgba(0,0,0,.06);
+  --skeleton-2: rgba(0,0,0,.12);
+}
+
+.dark {
+  --background: oklch(0.16 0.01 255);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.18 0.01 255);
+  --glass: rgba(20,20,24,.55);
+  --skeleton: rgba(255,255,255,.08);
+  --skeleton-2: rgba(255,255,255,.16);
+}
+
+/* =========================
+   Tailwind bridge
+========================= */
+@theme inline {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+}
+
+/* =========================
+   Base
+========================= */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+    background-image:
+      radial-gradient(
+        1200px 600px at 10% -10%,
+        color-mix(in oklch, var(--brand-green) 14%, transparent),
+        transparent
+      ),
+      radial-gradient(
+        900px 450px at 100% 0%,
+        color-mix(in oklch, var(--brand-red) 14%, transparent),
+        transparent
+      );
+  }
+}
+
+/* =========================
+   Glass Navbar (STATIC)
+========================= */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.site-nav.is-scrolled {
+  background: var(--nav-bg);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+/* =========================
+   Cards (NO MOTION)
+========================= */
+.card,
+[data-slot="card"] {
+  background: color-mix(in oklch, var(--glass) 85%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* =========================
+   Skeleton Loader (STATIC)
+========================= */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton),
+    var(--skeleton-2),
+    var(--skeleton)
+  );
+  border-radius: calc(var(--radius) - 6px);
+}
+
+/* =========================
+   Snowfall (STATIC DECOR)
+========================= */
+.snow::before,
+.snow::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background-image:
+    radial-gradient(2px 2px at 10% 10%, rgba(255,255,255,.8) 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 30% 30%, rgba(255,255,255,.7) 50%, transparent 52%),
+    radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.6) 50%, transparent 52%);
+  background-repeat: repeat;
+  background-size: 320px 320px;
+  opacity: .18;
+}
+
+/* =========================
+   Reduced Motion Safety
+========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
