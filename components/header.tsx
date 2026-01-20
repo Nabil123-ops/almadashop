@@ -26,14 +26,16 @@ export function Header() {
 
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="https://image2url.com/r2/default/images/1768893308914-4c97c185-a173-486e-9e32-a521efe6d924.jpg"
-              alt="AlmadaShop Logo"
-              width={140}
-              height={40}
-              priority
-              className="object-contain"
-            />
+            <div className="h-10 w-10 rounded-full overflow-hidden bg-transparent flex items-center justify-center logo-circle">
+              <Image
+                src="https://image2url.com/r2/default/images/1768893308914-4c97c185-a173-486e-9e32-a521efe6d924.jpg"
+                alt="AlmadaShop Logo"
+                width={40}
+                height={40}
+                className="object-cover"
+                priority
+              />
+            </div>
             <span className="hidden font-serif text-xl font-bold sm:inline-block">
               AlmadaShop
             </span>
@@ -54,7 +56,7 @@ export function Header() {
             </form>
           </div>
 
-          {/* ACTIONS */}
+          {/* ACTION BUTTONS */}
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
