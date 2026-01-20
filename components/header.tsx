@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Search, ShoppingCart, Menu, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,15 +23,23 @@ export function Header() {
     <header className="site-nav sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-              <span className="font-serif text-xl font-bold text-primary-foreground">D</span>
-            </div>
+
+          {/* LOGO */}
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="https://image2url.com/r2/default/images/1768893308914-4c97c185-a173-486e-9e32-a521efe6d924.jpg"
+              alt="AlmadaShop Logo"
+              width={140}
+              height={40}
+              priority
+              className="object-contain"
+            />
             <span className="hidden font-serif text-xl font-bold sm:inline-block">
-              SmartShop
+              AlmadaShop
             </span>
           </Link>
 
+          {/* SEARCH */}
           <div className="flex flex-1 items-center justify-center px-4">
             <form action="/search" method="GET" className="w-full max-w-xl">
               <div className="relative">
@@ -45,6 +54,7 @@ export function Header() {
             </form>
           </div>
 
+          {/* ACTIONS */}
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
@@ -76,6 +86,7 @@ export function Header() {
           </div>
         </div>
 
+        {/* NAVIGATION */}
         <nav className="hidden border-t border-border/40 py-3 sm:block">
           <ul className="flex items-center justify-center gap-6 text-sm font-medium">
             <li>
