@@ -1,19 +1,20 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* =========================
+   Dark Mode Custom Variant
+========================= */
 @custom-variant dark (&:is(.dark *));
 
 /* =========================
-   SMARTSHOP PREMIUM THEME
-   NO ANIMATION – ZERO LAG
+   Color System – SMARTSHOP PREMIUM
 ========================= */
-
 :root {
-  /* Brand */
+  /* Brand Colors */
   --brand-red: oklch(0.62 0.22 25);
   --brand-green: oklch(0.72 0.22 150);
 
-  /* Base */
+  /* Base Colors */
   --background: oklch(0.99 0.01 110);
   --foreground: oklch(0.15 0.02 250);
 
@@ -40,7 +41,7 @@
 
   --radius: 0.75rem;
 
-  /* Effects (STATIC) */
+  /* Effects */
   --glass: rgba(255,255,255,.65);
   --shadow-soft: 0 10px 30px rgba(0,0,0,.06);
   --shadow-card: 0 18px 50px rgba(0,0,0,.10);
@@ -63,7 +64,7 @@
 }
 
 /* =========================
-   Tailwind bridge
+   Tailwind Bridge
 ========================= */
 @theme inline {
   --font-sans: "Inter", system-ui, sans-serif;
@@ -83,11 +84,12 @@
 }
 
 /* =========================
-   Base
+   Base Styles
 ========================= */
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
 
   html {
@@ -112,17 +114,32 @@
         transparent
       );
   }
+
+  a {
+    @apply text-primary-foreground no-underline hover:opacity-80;
+  }
+
+  button, input, select, textarea {
+    font-family: var(--font-sans);
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    font-family: var(--font-serif);
+    color: var(--foreground);
+    margin: 0;
+  }
 }
 
 /* =========================
-   Glass Navbar (STATIC)
+   Glass Navbar
 ========================= */
 .site-nav {
   position: sticky;
   top: 0;
-  z-index: 40;
+  z-index: 50;
   background: transparent;
   border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .site-nav.is-scrolled {
@@ -134,17 +151,36 @@
 }
 
 /* =========================
-   Cards (NO MOTION)
+   Cards
 ========================= */
 .card,
 [data-slot="card"] {
   background: color-mix(in oklch, var(--glass) 85%, transparent);
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow-soft);
+  border-radius: var(--radius);
+  padding: 1rem;
 }
 
 /* =========================
-   Skeleton Loader (STATIC)
+   Circle Logo Utility
+========================= */
+.logo-circle {
+  border-radius: 9999px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: transform 0.2s ease-in-out;
+}
+
+.logo-circle:hover {
+  transform: scale(1.1);
+}
+
+/* =========================
+   Skeleton Loader
 ========================= */
 .skeleton {
   background: linear-gradient(
@@ -157,7 +193,7 @@
 }
 
 /* =========================
-   Snowfall (STATIC DECOR)
+   Snowfall / Static Decoration
 ========================= */
 .snow::before,
 .snow::after {
@@ -176,7 +212,7 @@
 }
 
 /* =========================
-   Reduced Motion Safety
+   Reduced Motion
 ========================= */
 @media (prefers-reduced-motion: reduce) {
   * {
