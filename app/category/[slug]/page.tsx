@@ -1,5 +1,4 @@
-"use client"
-
+// 1. REMOVE "use client" - This allows the use of @/lib/supabase/server
 import { createClient } from "@/lib/supabase/server"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -7,13 +6,18 @@ import { ProductCard } from "@/components/product-card"
 import { notFound } from "next/navigation"
 
 interface CategoryPageProps {
-  params: { slug: string }
+  // In Next.js 15+, params is a Promise
+  params: Promise<{ slug: string }>
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { slug } = params
+  // Await the params
+  const { slug } = await params
+  
+  // Initialize the Server Client
   const supabase = await createClient()
 
+  // Fetch Category
   const { data: category } = await supabase
     .from("categories")
     .select("*")
@@ -22,6 +26,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   if (!category) notFound()
 
+  // Fetch Products
   const { data: products } = await supabase
     .from("products")
     .select("*")
@@ -74,4 +79,5 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <Footer />
     </div>
   )
-                  }
+                            }
+      
