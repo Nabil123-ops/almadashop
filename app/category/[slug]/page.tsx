@@ -1,22 +1,26 @@
+"use client"
+
 import { createClient } from "@/lib/supabase/server"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
 import { notFound } from "next/navigation"
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
+interface CategoryPageProps {
+  params: { slug: string }
+}
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { slug } = params
   const supabase = await createClient()
 
-  const { data: category } = await supabase.from("categories").select("*").eq("slug", slug).single()
+  const { data: category } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("slug", slug)
+    .single()
 
-  if (!category) {
-    notFound()
-  }
+  if (!category) notFound()
 
   const { data: products } = await supabase
     .from("products")
@@ -26,16 +30,22 @@ export default async function CategoryPage({
     .order("created_at", { ascending: false })
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Header />
 
       <main className="flex-1">
         <div className="container mx-auto px-4 py-8">
+          {/* CATEGORY TITLE */}
           <div className="mb-8">
-            <h1 className="mb-2 font-serif text-3xl font-bold">{category.name}</h1>
-            <p className="text-muted-foreground">{category.description}</p>
+            <h1 className="mb-2 font-serif text-3xl font-bold">
+              {category.name}
+            </h1>
+            {category.description && (
+              <p className="text-muted-foreground">{category.description}</p>
+            )}
           </div>
 
+          {/* PRODUCTS GRID */}
           {products && products.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {products.map((product) => (
@@ -52,8 +62,10 @@ export default async function CategoryPage({
               ))}
             </div>
           ) : (
-            <div className="py-12 text-center">
-              <p className="text-muted-foreground">No products in this category yet.</p>
+            <div className="py-20 text-center">
+              <p className="text-xl text-muted-foreground">
+                No products in this category yet.
+              </p>
             </div>
           )}
         </div>
@@ -62,4 +74,4 @@ export default async function CategoryPage({
       <Footer />
     </div>
   )
-}
+                  }
