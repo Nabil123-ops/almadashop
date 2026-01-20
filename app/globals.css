@@ -16,19 +16,19 @@
 
   /* Base Colors */
   --background: oklch(0.99 0.01 110);
-  --foreground: oklch(0.15 0.02 250);
+  --foreground: oklch(0.15 0.02 25);  /* darker for visibility */
 
   --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
 
   --primary: var(--brand-red);
-  --primary-foreground: oklch(0.99 0.01 110);
+  --primary-foreground: oklch(0.05 0.02 25); /* dark text for buttons/links */
 
   --secondary: oklch(0.965 0.01 110);
   --secondary-foreground: var(--foreground);
 
   --muted: oklch(0.965 0.01 110);
-  --muted-foreground: oklch(0.52 0.02 250);
+  --muted-foreground: oklch(0.52 0.02 25);
 
   --accent: oklch(0.91 0.06 150);
   --accent-foreground: var(--foreground);
@@ -61,6 +61,10 @@
   --glass: rgba(20,20,24,.55);
   --skeleton: rgba(255,255,255,.08);
   --skeleton-2: rgba(255,255,255,.16);
+
+  --primary-foreground: oklch(0.95 0.02 255); /* visible on dark bg */
+  --secondary-foreground: oklch(0.95 0.02 255);
+  --muted-foreground: oklch(0.85 0.02 255);
 }
 
 /* =========================
@@ -121,6 +125,16 @@
 
   button, input, select, textarea {
     font-family: var(--font-sans);
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  button:hover {
+    background-color: color-mix(in oklch, var(--primary) 85%, var(--foreground));
   }
 
   h1,h2,h3,h4,h5,h6 {
