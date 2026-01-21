@@ -1,5 +1,3 @@
-"use client"
-
 import { createClient } from "@/lib/supabase/server"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -67,4 +65,4 @@ export default async function ProductsPage() {
       <Footer />
     </div>
   )
-      }
+}
