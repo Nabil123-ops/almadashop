@@ -8,20 +8,21 @@ import Link from "next/link"
 import Image from "next/image"
 
 /* -------------------------------------
-   CATEGORY IMAGE MAP (SAFE & CLEAN)
+   CATEGORY IMAGE MAP (fallback local images)
 ------------------------------------- */
 const categoryImages: Record<string, string> = {
   "beauty-health": "/categories/beauty.jpg",
   "electronics": "/categories/electronics.png",
   "fashion": "/categories/fashion.jpg",
   "health-fitness": "/categories/fitness.jpg",
-  "kids-toys": "https://image2url.com/r2/default/images/1770886922576-cf83b565-3df0-4e97-bd6e-de3c911e1812.jpeg", // <-- updated link
-  "kids-clothes": "https://image2url.com/r2/default/images/1770886922576-cf83b565-3df0-4e97-bd6e-de3c911e1812.jpeg", // <-- added new kids category
+  "kids-toys": "https://image2url.com/r2/default/images/1770886922576-cf83b565-3df0-4e97-bd6e-de3c911e1812.jpeg",
+  "kids-clothes": "https://image2url.com/r2/default/images/1770886922576-cf83b565-3df0-4e97-bd6e-de3c911e1812.jpeg",
   "gifts": "/categories/gifts.jpg",
 }
 
-const getCategoryImage = (slug: string) =>
-  categoryImages[slug] || "/categories/default.jpg"
+// Get category image (Supabase image_url takes priority)
+const getCategoryImage = (category: { slug: string; image_url?: string }) =>
+  category.image_url || categoryImages[category.slug] || "/categories/default.jpg"
 
 /* -------------------------------------
    CATEGORY ORDER (UX POLISH)
@@ -31,7 +32,7 @@ const categoryOrder = [
   "fashion",
   "beauty-health",
   "health-fitness",
-  "kids-clothes",  // <-- new category first
+  "kids-clothes",
   "kids-toys",
   "gifts",
 ]
@@ -39,20 +40,21 @@ const categoryOrder = [
 export default async function HomePage() {
   const supabase = await createClient()
 
+  // Fetch all categories
   const { data: categories, error } = await supabase
     .from("categories")
-    .select("id, name, slug, description")
-    .limit(7) // <-- updated to 7 because we added a new category
+    .select("id, name, slug, description, image_url") // include image_url from DB
+    // .limit removed to show all categories
 
   if (error) {
     console.error("Failed to load categories:", error)
   }
 
+  // Sort categories by predefined order
   const sortedCategories =
     categories?.sort(
       (a, b) =>
-        categoryOrder.indexOf(a.slug) -
-        categoryOrder.indexOf(b.slug)
+        categoryOrder.indexOf(a.slug) - categoryOrder.indexOf(b.slug)
     ) || []
 
   return (
@@ -134,7 +136,7 @@ export default async function HomePage() {
                       <CardContent className="p-0">
                         <div className="relative aspect-[16/9] overflow-hidden bg-muted">
                           <Image
-                            src={getCategoryImage(category.slug)}
+                            src={getCategoryImage(category)}
                             alt={category.name}
                             fill
                             sizes="(max-width: 768px) 100vw, 33vw"
