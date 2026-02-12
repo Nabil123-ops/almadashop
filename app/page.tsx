@@ -15,7 +15,8 @@ const categoryImages: Record<string, string> = {
   "electronics": "/categories/electronics.png",
   "fashion": "/categories/fashion.jpg",
   "health-fitness": "/categories/fitness.jpg",
-  "kids-toys": "/categories/toys.jpg",
+  "kids-toys": "https://image2url.com/r2/default/images/1770886922576-cf83b565-3df0-4e97-bd6e-de3c911e1812.jpeg", // <-- updated link
+  "kids-clothes": "https://image2url.com/r2/default/images/1770886922576-cf83b565-3df0-4e97-bd6e-de3c911e1812.jpeg", // <-- added new kids category
   "gifts": "/categories/gifts.jpg",
 }
 
@@ -30,6 +31,7 @@ const categoryOrder = [
   "fashion",
   "beauty-health",
   "health-fitness",
+  "kids-clothes",  // <-- new category first
   "kids-toys",
   "gifts",
 ]
@@ -40,7 +42,7 @@ export default async function HomePage() {
   const { data: categories, error } = await supabase
     .from("categories")
     .select("id, name, slug, description")
-    .limit(6)
+    .limit(7) // <-- updated to 7 because we added a new category
 
   if (error) {
     console.error("Failed to load categories:", error)
