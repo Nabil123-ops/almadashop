@@ -51,6 +51,20 @@ export const metadata: Metadata = {
     title: "SmartShop – Premium Online Store",
     description:
       "Shop premium products with Cash on Delivery and fast shipping.",
+    images: [
+      {
+        url: "https://image2url.com/r2/default/images/1770893128913-7a55ca9d-e370-47c7-92af-764a92d2a700.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SmartShop Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SmartShop – Premium Online Store",
+    description: "Shop premium products with Cash on Delivery and fast shipping.",
+    images: ["https://image2url.com/r2/default/images/1770893128913-7a55ca9d-e370-47c7-92af-764a92d2a700.jpg"],
   },
   icons: {
     icon: [
@@ -96,4 +110,5 @@ export default function RootLayout({
       </body>
     </html>
   )
-}
+       }
+     
